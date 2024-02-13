@@ -12,5 +12,16 @@ app.post("/register", async (req, res) => {
   console.log(result);
   res.send({ result: "success" });
 });
-
+//loginapi
+app.post("/login", async (req, res) => {
+  console.log(req.body);
+  if (req.body.password && req.body.email) {
+    let result = await User.findOne(req.body);
+    if (result) {
+      res.send("user logged in");
+    } else {
+      res.send("error");
+    }
+  }
+});
 app.listen(5000);

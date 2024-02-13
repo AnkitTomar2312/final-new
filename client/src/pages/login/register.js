@@ -42,7 +42,6 @@ const Login = () => {
         <section
           style={{
             padding: "60px 24px 100px 24px",
-
             height: "auto",
             width: "100%",
           }}
