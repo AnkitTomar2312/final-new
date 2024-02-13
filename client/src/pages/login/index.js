@@ -13,12 +13,16 @@ const Login = () => {
   //   setLoading(false);
   // }, 2000);
   useEffect(() => {
+    const auth = localStorage.getItem("user");
+    if (auth) {
+      navigate("/");
+    }
     if (email && password) {
       setAllFieldsFilled(false);
     }
   });
-
-  const sendData = async () => {
+  //useEffect(() => {}, []);
+  const handleLogin = async () => {
     let result = await fetch("http://localhost:5000/login", {
       method: "post",
       body: JSON.stringify({ email, password }),
@@ -27,12 +31,21 @@ const Login = () => {
       },
     });
     result = await result.json();
-    if (result) {
-      alert("successfull");
+    if (result._id) {
+      localStorage.setItem("user", JSON.stringify(result));
+      navigate("/");
     } else {
-      alert("not succesfull");
+      alert("Email and Password does not match");
     }
+    // if (result.auth) {
+    //   localStorage.setItem("user", JSON.stringify(result.user));
+    //   localStorage.setItem("token", JSON.stringify(result.auth));
+    //   navigate("/");
+    // } else {
+    //   alert("Please enter valid details");
+    // }
   };
+
   return (
     <HomeLayout>
       {loading ? (
@@ -69,7 +82,7 @@ const Login = () => {
                 borderRadius: "8px",
                 background: "#f3f4f6",
               }}
-              type="text"
+              type="email"
               placeholder="email..."
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -89,7 +102,7 @@ const Login = () => {
                 borderRadius: "8px",
                 background: "#f3f4f6",
               }}
-              type="passwrord"
+              type="password"
               placeholder="password..."
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -130,7 +143,7 @@ const Login = () => {
                       }
                 }
                 onClick={() => {
-                  sendData();
+                  handleLogin();
                 }}
                 disabled={allFieldsFilled}
               >

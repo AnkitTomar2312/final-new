@@ -16,11 +16,11 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
   console.log(req.body);
   if (req.body.password && req.body.email) {
-    let result = await User.findOne(req.body);
+    let result = await User.findOne(req.body).select("-password");
     if (result) {
-      res.send("user logged in");
+      res.send(result);
     } else {
-      res.send("error");
+      res.send({ result: "user not found" });
     }
   }
 });

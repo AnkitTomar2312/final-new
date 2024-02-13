@@ -18,7 +18,12 @@ const Login = () => {
       setAllFieldsFilled(false);
     }
   });
-
+  useEffect(() => {
+    const auth = localStorage.getItem("user");
+    if (auth) {
+      navigate("/");
+    }
+  }, []);
   const sendData = async () => {
     let result = await fetch("http://localhost:5000/register", {
       method: "post",
@@ -30,6 +35,7 @@ const Login = () => {
     result = await result.json();
     if (result) {
       alert("successfull");
+      navigate("/login");
     } else {
       alert("not succesfull");
     }
