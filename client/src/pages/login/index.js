@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HomeLayout from "../../layout/HomeLayout/HomeLayout";
 import Splash from "../../components/splash/splash";
-
+import Database from "../../config";
 const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ const Login = () => {
   });
   //useEffect(() => {}, []);
   const handleLogin = async () => {
-    let result = await fetch("http://localhost:5000/login", {
+    let result = await fetch(`${Database}/login`, {
       method: "post",
       body: JSON.stringify({ email, password }),
       headers: {

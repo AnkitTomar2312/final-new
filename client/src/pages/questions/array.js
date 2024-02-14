@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { json, useNavigate } from "react-router-dom";
 import HomeLayout from "../../layout/HomeLayout/HomeLayout";
 import Splash from "../../components/splash/splash";
-
+import Database from "../../config";
 const QuestionsList = ({ questions }) => {
   const navigate = useNavigate();
   const [currentQuestion, setCurrentQuestion] = useState(0);
-
   const handleNextQuestion = () => {
     setCurrentQuestion((prevQuestion) =>
       prevQuestion < questions.length - 1 ? prevQuestion + 1 : prevQuestion
@@ -154,7 +153,7 @@ const App = () => {
     fetchData();
   }, []);
   const fetchData = async () => {
-    let result = await fetch("http://localhost:5000/array-questions", {
+    let result = await fetch(`${Database}/array-questions`, {
       method: "get",
       //body: JSON.stringify({ title, description, image }),
       headers: {

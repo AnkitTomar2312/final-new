@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import HomeLayout from "../../layout/HomeLayout/HomeLayout";
 import Splash from "../../components/splash/splash";
-
+import Database from "../../config";
 const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -25,7 +25,7 @@ const Login = () => {
     }
   }, []);
   const sendData = async () => {
-    let result = await fetch("http://localhost:5000/register", {
+    let result = await fetch(`${Database}/register`, {
       method: "post",
       body: JSON.stringify({ name, email, password }),
       headers: {
