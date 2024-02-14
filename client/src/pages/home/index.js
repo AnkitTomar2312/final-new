@@ -16,14 +16,15 @@ import Banner from "../../components/banner/banner";
 const Index = ({ children }) => {
   const navigate = useNavigate();
   const [loader, setLoader] = useState(true);
+  const [userName, setUserName] = useState("");
   useEffect(() => {
+    const User = JSON.parse(localStorage.getItem("user"));
+    setUserName(User.name);
     const timeoutId = setTimeout(() => {
       setLoader(false);
     }, 4000);
-
-    // Clean up the timeout when the component unmounts
     return () => clearTimeout(timeoutId);
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   return (
     <HomeLayout>
@@ -65,7 +66,7 @@ const Index = ({ children }) => {
                   marginBottom: "0",
                 }}
               >
-                hi, ankit
+                hi, {userName}
               </p>
               <p
                 style={{
