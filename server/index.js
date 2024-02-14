@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("./db/config");
 const User = require("./db/Users");
+const Questions = require("./db/Questions");
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -24,4 +25,20 @@ app.post("/login", async (req, res) => {
     }
   }
 });
+
+//question api
+app.get("/array-questions", async (req, res) => {
+  try {
+    let result = await Questions.find();
+    if (result.length > 0) {
+      res.send(result);
+    } else {
+      res.send({ result: "nothing to show" });
+    }
+  } catch (error) {
+    console.error("Error retrieving questions:", error);
+    res.status(500).send("Internal server error");
+  }
+});
+
 app.listen(5000);
