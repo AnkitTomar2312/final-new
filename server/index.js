@@ -15,7 +15,7 @@ app.use(function (req, res, next) {
 });
 //testing
 app.post("/test", (req, res) => {
-  res.send({ result: "working" });
+  res.send({ result: "POst working" });
 });
 //register API
 app.post("/register", async (req, res) => {
