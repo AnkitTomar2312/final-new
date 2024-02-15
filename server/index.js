@@ -13,6 +13,10 @@ app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
+//testing
+app.get("/test", (req, res) => {
+  res.send({ result: "working" });
+});
 //register API
 app.post("/register", async (req, res) => {
   let user = new User(req.body);
