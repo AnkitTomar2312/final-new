@@ -23,6 +23,8 @@ const Login = () => {
   });
   //useEffect(() => {}, []);
   const handleLogin = async () => {
+    // let result = await fetch(`${Database}/test`);
+    // console.log(result);
     let result = await fetch(`${Database}/login`, {
       method: "post",
       body: JSON.stringify({ email, password }),
