@@ -21,7 +21,7 @@ const Profile = () => {
       // Navigate to the login page
       navigate("/login");
     } catch (error) {
-      console.error("Error logging out:", error);
+      console.error("Error logging out is:", error);
     }
   };
   const analysis = ["your progress", "your analytics", "suggestions by AI"];
