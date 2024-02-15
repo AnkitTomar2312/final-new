@@ -12,7 +12,6 @@ const Profile = () => {
   setTimeout(() => {
     setLoading(false);
   }, 2000);
-
   const handleLogout = async () => {
     try {
       // Sign out from Firebase
