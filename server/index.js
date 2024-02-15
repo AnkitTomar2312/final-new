@@ -14,7 +14,7 @@ app.use(function (req, res, next) {
   next();
 });
 //testing
-app.get("/test", (req, res) => {
+app.post("/test", (req, res) => {
   res.send({ result: "working" });
 });
 //register API
