@@ -24,17 +24,45 @@ app.post("/register", async (req, res) => {
 });
 
 // Login route
+// Assuming you have already defined your express app and middleware
+
 app.post("/login", async (req, res) => {
-  console.log(req.body);
-  if (req.body.password && req.body.email) {
-    let result = await User.findOne(req.body).select("-password");
-    if (result) {
-      res.send(result);
+  const { email, password } = req.body;
+
+  // Check if the email and password are valid
+  // Perform authentication logic here, such as querying the database
+  // Assume User is your Mongoose model for users
+
+  try {
+    const user = await User.findOne({ email, password });
+
+    if (user) {
+      // Authentication successful
+      res.json({
+        _id: user._id,
+        email: user.email /* Add other user data if needed */,
+      });
     } else {
-      res.send({ result: "user not found" });
+      // Authentication failed
+      res.status(401).json({ error: "Invalid credentials" });
     }
+  } catch (error) {
+    console.error("Error during login:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
+
+// app.post("/login", async (req, res) => {
+//   console.log(req.body);
+//   if (req.body.password && req.body.email) {
+//     let result = await User.findOne(req.body).select("-password");
+//     if (result) {
+//       res.send(result);
+//     } else {
+//       res.send({ result: "user not found" });
+//     }
+//   }
+// });
 
 // Question route
 app.get("/array-questions", async (req, res) => {
