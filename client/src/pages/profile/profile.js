@@ -12,10 +12,16 @@ const Profile = () => {
   setTimeout(() => {
     setLoading(false);
   }, 2000);
+  const handleLogout = async () => {
+    try {
+      // Sign out from Firebase
+      await auth.signOut();
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    navigate("/login");
+      // Navigate to the login page
+      navigate("/login");
+    } catch (error) {
+      console.error("Error logging out is:", error);
+    }
   };
   const analysis = ["your progress", "your analytics", "suggestions by AI"];
   const offering = [
