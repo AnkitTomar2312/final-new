@@ -39,6 +39,7 @@ const Login = () => {
     } else {
       alert("Email and Password does not match");
     }
+    //
     // if (result.auth) {
     //   localStorage.setItem("user", JSON.stringify(result.user));
     //   localStorage.setItem("token", JSON.stringify(result.auth));
